@@ -1,0 +1,44 @@
+# Vagrant VBox guest additions updater
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    # Do not auto-install guest additions.
+    config.vbguest.no_install = true
+  end
+
+# Vagrant cachier
+  if Vagrant.has_plugin?("vagrant-cachier")
+    # Configure cached packages to be shared between instances of the same base box.
+    # More info on http://fgrehm.viewdocs.io/vagrant-cachier/usage
+    config.cache.scope = :box
+
+    # OPTIONAL: If you are using VirtualBox, you might want to use that to enable NFS for shared folders. This is also very useful for vagrant-libvirt if you want bi-directional sync
+    # config.cache.synced_folder_opts = {
+    #   type: :nfs,
+    #   # The nolock option can be useful for an NFSv3 client that wants to avoid the NLM sideband protocol. Without this option, apt-get might hang if it tries to lock files needed for /var/cache/* operations. All of this can be avoided by using NFSv4 everywhere. Please note that the tcp option is not the default.
+    #   mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
+    # }
+
+    # Enable virtualbox shared folders to sync caches.
+    # *** This requires the vbox shared folder option ***
+    # You could also use vagrant-vbguest to install guest additions in VMs spin off boxes which do not have them.
+    config.cache.synced_folder_opts = {
+      type: "virtualbox"
+    }
+    # For more information please check http://docs.vagrantup.com/v2/synced-folders/basic_usage.html
+
+    config.cache.auto_detect = false
+    config.cache.enable :apt
+    config.cache.enable :apt_lists
+    config.cache.enable :apt_cacher
+    # Pip plugin was not included in the recent release.
+    # See: https://github.com/fgrehm/vagrant-cachier/issues/159
+    # config.cache.enable :pip
+
+    config.cache.enable :generic, {
+      # Be careful not to cache /opt because /opt/VirtualboxGuestAdditions is necessary for the vboxsf module to load. Without vboxsf, vagrant will error out when attempting to mount the shared folders. The shared folders step happens at a much earlier stage than vagrant-cachier.
+      # Most wget and curl downloads go here.
+      "opt-downloads" => { cache_dir: "/opt/downloads" },
+      "python-dist-packages" => { cache_dir: "/usr/local/lib/python2.7" },
+      "python-pip-http" => { cache_dir: "/root/.cache/pip" }
+    }
+
+end
