@@ -17,31 +17,40 @@ plugins_config = File.expand_path('./Vagrantfile.plugins', __FILE__)
 load plugins_config if File.exists?(plugins_config)
 
 # Load machine definition
-machines = YAML.load_file('machine_definition.yml')
+machines = YAML.load_file('machine_inventory.yml')
+HOSTS = ["all", "hosts"]
 
 
 # Vagrant configuration section.
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    machines.each do |machine|
-        config.vm.define machine['name'] do |m|
+    machines.dig(*HOSTS).each do |machine|
+        config.vm.define machine[0] do |m|
             # Configure virtual machine.
-            m.vm.box = machine['box']
-            m.vm.network :private_network, ip: machine["ip"]
+            m.vm.box = machine[1]['box']
+#            m.vm.box = "centos/7"
+            m.vm.network :private_network, ip: machine[1]["ansible_host"]
+
             m.vm.provider :virtualbox do |vb|
-                vb.memory = machine['memory'] ||= DEFAULT_MEMORY
-                vb.cpus = machine['cpus'] ||= DEFAULT_CPUS
+                vb.memory = machine[1]['memory'] ||= DEFAULT_MEMORY
+                vb.cpus = machine[1]['cpus'] ||= DEFAULT_CPUS
                 vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
                 vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
             end
+#            m.vm.provider :libvirt do |lv|
+#             lv.memory = machine['memory'] ||= DEFAULT_MEMORY
+#           end
 
             m.vm.provision "ansible" do |ansible|
 #more details here https://www.vagrantup.com/docs/provisioning/ansible_common.html
-            ansible.playbook = machine['playbook']
-            ansible.galaxy_roles_path = "roles"
-            ansible.inventory_path = "scripts/vagrant.py" 
+              ansible.playbook = machine[1]['playbook']
+              ansible.galaxy_roles_path = "roles"
+#            ansible.inventory_path = "scripts/vagrant.py" 
+              ansible.inventory_path = "machine_inventory.yml"
          #  ansible.verbose = "vvv"
-            ansible.become = true
+              ansible.become = true
             end
         end
+
     end
+
 end

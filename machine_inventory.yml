@@ -1,0 +1,19 @@
+---
+all:
+  hosts:
+    master:
+      hostname: master.example.org
+      ansible_port: 22
+      ansible_host: 192.168.44.10
+      box: geerlingguy/centos7
+      ram: 1024
+      cpus: 1
+      playbook: master.yml
+    slave:
+      hostname: slave.example.org
+      ansible_port: 22
+      ansible_host: 192.168.44.11
+      box: geerlingguy/centos7
+      ram: 1024
+      cpus: 1
+      playbook: slave.yml
