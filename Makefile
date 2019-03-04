@@ -8,7 +8,7 @@ ansible-flags = -e ansible_python_interpreter=/usr/bin/python3
 playbook = provisioning/playbook.yml
 
 #export ANSIBLE_INVENTORY
-export ANSIBLE_CONFIG=$(current-dir)/provisioning/ansible.cfg
+export ANSIBLE_CONFIG=$(current-dir)/machine_inventory.yml
 
 
 requirements: ## Install requirements from scratch
