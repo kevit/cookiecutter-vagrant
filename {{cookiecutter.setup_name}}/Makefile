@@ -1,14 +1,9 @@
 .DEFAULT_GOAL := help
 
-
-current-dir = $(shell pwd)
 ansible = $(shell command -v ansible)
 ansible-playbook = $(shell command -v ansible-playbook)
-ansible-flags = -e ansible_python_interpreter=/usr/bin/python3
-playbook = provisioning/playbook.yml
 
-#export ANSIBLE_INVENTORY
-export ANSIBLE_CONFIG=$(current-dir)/machine_inventory.yml
+export ANSIBLE_CONFIG=$(current-dir)/ansible.cfg
 
 
 requirements: ## Install requirements from scratch
