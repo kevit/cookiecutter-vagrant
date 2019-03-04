@@ -2,18 +2,22 @@
 all:
   hosts:
     master:
-      hostname: master.example.org
+      hostname: 192.168.44.10.xip.io
       ansible_port: 22
       ansible_host: 192.168.44.10
-      box: geerlingguy/centos7
+      ansible_user: vagrant
+      ansible_ssh_private_key_file: .vagrant/machines/master/libvirt/private_key
+      box: centos/7
       ram: 1024
       cpus: 1
       playbook: master.yml
     slave:
-      hostname: slave.example.org
+      hostname: 192.168.44.11.xip.io
       ansible_port: 22
       ansible_host: 192.168.44.11
-      box: geerlingguy/centos7
+      ansible_user: vagrant
+      ansible_ssh_private_key_file: .vagrant/machines/slave/libvirt/private_key
+      box: centos/7
       ram: 1024
       cpus: 1
       playbook: slave.yml

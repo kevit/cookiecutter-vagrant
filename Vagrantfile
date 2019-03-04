@@ -27,18 +27,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         config.vm.define machine[0] do |m|
             # Configure virtual machine.
             m.vm.box = machine[1]['box']
-#            m.vm.box = "centos/7"
             m.vm.network :private_network, ip: machine[1]["ansible_host"]
 
-            m.vm.provider :virtualbox do |vb|
-                vb.memory = machine[1]['memory'] ||= DEFAULT_MEMORY
-                vb.cpus = machine[1]['cpus'] ||= DEFAULT_CPUS
-                vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
-                vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
-            end
-#            m.vm.provider :libvirt do |lv|
-#             lv.memory = machine['memory'] ||= DEFAULT_MEMORY
-#           end
+#            m.vm.provider :virtualbox do |vb|
+#                vb.memory = machine[1]['memory'] ||= DEFAULT_MEMORY
+#                vb.cpus = machine[1]['cpus'] ||= DEFAULT_CPUS
+#                vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
+#                vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
+#            end
+            m.vm.provider :libvirt do |lv|
+             lv.memory = machine[1]['memory'] ||= DEFAULT_MEMORY
+           end
 
             m.vm.provision "ansible" do |ansible|
 #more details here https://www.vagrantup.com/docs/provisioning/ansible_common.html
