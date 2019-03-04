@@ -1,5 +1,5 @@
 {
-    "setup_name": ".",
+    "setup_name": "project",
     "_copy_without_render": [
         "scripts",
         "Makefile",
