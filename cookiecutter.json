@@ -1,5 +1,3 @@
 {
-    "setup_name": "role_name",
-    "author": "your name",
-    "license": ["GPLv3", "GPLv2", "BSD", "MIT", "Apache", "CC-BY"]
+    "setup_name": "."
 }
