@@ -9,6 +9,6 @@
         "ansible.cfg",
         "machine_inventory",
         "requirements.yml",
-        "molecule"
+        "*molecule"
     ]
 }
