@@ -1,0 +1,17 @@
+galaxy_info:
+  role_name: ansible-role-{{cookiecutter.setup_name | lower | replace(' ', '_')}}
+  author: kevit
+  description: This role install {{cookiecutter.setup_name}}
+  company: White Horse LLC
+  license: MIT
+  min_ansible_version: 2.7
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+
+  galaxy_tags:
+    - system
+
+dependencies: []
