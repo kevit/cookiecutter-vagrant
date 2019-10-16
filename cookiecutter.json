@@ -2,6 +2,7 @@
     "setup_name": "project",
     "_copy_without_render": [
         "scripts",
+        "vagrant",
         "Makefile",
         "Vagrantfile",
         "Vagrantfile.plugins",
