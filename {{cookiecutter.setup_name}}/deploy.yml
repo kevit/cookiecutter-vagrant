@@ -1,0 +1,7 @@
+- hosts: all
+  tasks:
+    - name: Run role
+      include_role:
+        name: ansible-role-{{cookiecutter.setup_name}}
+
+

@@ -1,24 +1,14 @@
 ---
 all:
   hosts:
-    master:
-      hostname: 192.168.44.10.xip.io
+    cookiecutter:
+      hostname: 192.168.44.90.xip.io
       ansible_port: 22
-      ansible_host: 192.168.44.10
+      ansible_host: 192.168.44.90
       ansible_user: vagrant
-      ansible_ssh_private_key_file: .vagrant/machines/master/libvirt/private_key
-      box: centos/7
-      #box: generic/ubuntu1804
+      ansible_ssh_private_key_file: .vagrant/machines/cookiecutter/libvirt/private_key
+      box: generic/debian9
       ram: 1024
       cpus: 1
-      playbook: master.yml
-    slave:
-      hostname: 192.168.44.11.xip.io
-      ansible_port: 22
-      ansible_host: 192.168.44.11
-      ansible_user: vagrant
-      ansible_ssh_private_key_file: .vagrant/machines/slave/libvirt/private_key
-      box: centos/7
-      ram: 1024
-      cpus: 1
-      playbook: slave.yml
+      playbook: deploy.yml
+      ansible_python_interpreter: /usr/bin/python3

@@ -40,10 +40,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
            end
 
             m.vm.provision "ansible" do |ansible|
-#more details here https://www.vagrantup.com/docs/provisioning/ansible_common.html
               ansible.playbook = machine[1]['playbook']
               ansible.galaxy_roles_path = "roles"
-#            ansible.inventory_path = "scripts/vagrant.py" 
               ansible.inventory_path = "machine_inventory.yml"
          #  ansible.verbose = "vvv"
               ansible.become = true
