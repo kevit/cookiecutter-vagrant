@@ -28,6 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             # Configure virtual machine.
             m.vm.box = machine[1]['box']
             m.vm.network :private_network, ip: machine[1]["ansible_host"]
+            m.vm.synced_folder ".", "/vagrant", disabled: true
 
 #            m.vm.provider :virtualbox do |vb|
 #                vb.memory = machine[1]['memory'] ||= DEFAULT_MEMORY
