@@ -47,7 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 #            ansible.inventory_path = "scripts/vagrant.py" 
               ansible.inventory_path = "machine_inventory.yml"
          #  ansible.verbose = "vvv"
-              ansible.become = true
+#              ansible.become = true
             end
         end
 

@@ -7,7 +7,7 @@ all:
       ansible_host: 192.168.44.90
       ansible_user: vagrant
       ansible_ssh_private_key_file: .vagrant/machines/cookiecutter/libvirt/private_key
-      box: generic/debian9
+      box: debian/bookworm64
       ram: 1024
       cpus: 1
       playbook: deploy.yml
